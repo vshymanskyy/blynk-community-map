@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="http://blynkmap.localtunnel.me/preview.png" />
+  <meta property="og:image:secure_url" content="https://blynkmap.localtunnel.me/preview.png" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="269" />
+  <title>Blynk Community Map</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.Default.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/leaflet.markercluster.js"></script>
+  <script src="map_data.js"></script>
+
+</head>
+<body>
+  <div class="header"><a href="http://community.blynk.cc/"><img src="community_logo.png" width="300px"/></a></div>
+  <div id="map"></div>
+  <div style="text-align: center; font-weight: bold">Move your mouse over a cluster to see the bounds, click a cluster to zoom to those bounds</div>
+
+  <div style="text-align: center">Join our community forum <a href="http://community.blynk.cc/">http://community.blynk.cc/</a><div/>
+  <script type="text/javascript">
+
+    var grayscale = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+      id: 'mapbox.light',
+      maxZoom: 17,
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                  '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                  'Imagery © <a href="http://mapbox.com">Mapbox</a>'
+    });
+
+    var markers = L.markerClusterGroup();
+    for (var i = 0; i < addressPoints.length; i++) {
+      var a = addressPoints[i];
+      var marker = L.marker(new L.LatLng(a[0], a[1])); // , { title: a[2] }
+      //marker.bindPopup(a[2]);
+      markers.addLayer(marker);
+    }
+
+    var map = L.map('map', {
+      //zoomAnimation: false,
+      layers: [grayscale, markers],
+      worldCopyJump: true
+    });
+    map.fitWorld().zoomIn();
+
+  </script>
+</body>
+</html>
