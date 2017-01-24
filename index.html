@@ -40,7 +40,10 @@
                   'Imagery © <a href="http://mapbox.com">Mapbox</a>'
     });
 
-    var markers = L.markerClusterGroup();
+    var markers = L.markerClusterGroup({
+      maxClusterRadius: 40
+    });
+
     for (var i = 0; i < addressPoints.length; i++) {
       var a = addressPoints[i];
       var marker = L.marker(new L.LatLng(a[0], a[1])); // , { title: a[2] }
