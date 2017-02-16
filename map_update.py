@@ -26,6 +26,6 @@ with gzip.open(fn, mode='rt', encoding='utf-8') as f:
 
 print("Found {} records".format(len(data)))
 with open('map_data.js', 'w') as f:
-    f.write("var addressPoints = ");
-    json.dump(data, f) #, indent=1)
-    f.write(";");
+    output = "var addressPoints = " + json.dumps(data) + ";"
+    output = output.replace("], [", "],\n[")
+    f.write(output)
