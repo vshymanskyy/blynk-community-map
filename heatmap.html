@@ -41,12 +41,13 @@
 
     for (var i = 0; i < addressPoints.length; i++) {
       var a = addressPoints[i];
-      a[2] = 7
+      a[2] = 10.0
     }
 
     var heat = L.heatLayer(addressPoints, {
-      radius: 20,
-      blur: 20,
+      radius: 15,
+      blur: 10,
+      max: 1.0,
       //gradient: { 0: '#23c890', 0.6: '#23c890' }
     });
 
