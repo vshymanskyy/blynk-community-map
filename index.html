@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/MarkerCluster.Default.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.0/leaflet.markercluster.js"></script>
+
+  <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+
   <script src="map_data.js"></script>
 
 </head>
@@ -51,11 +54,35 @@
       markers.addLayer(marker);
     }
 
+    for (var i = 0; i < addressPoints.length; i++) {
+      var a = addressPoints[i];
+      a[2] = 10.0
+    }
+
+    var heat = L.heatLayer(addressPoints, {
+      radius: 15,
+      blur: 10,
+      max: 1.0,
+      //gradient: { 0: '#23c890', 0.6: '#23c890' }
+    });
+    
+    var baseMaps = {
+      "Grayscale": grayscale
+    };
+
+    var overlayMaps = {
+      "Heatmap": heat,
+      "Markers": markers,
+    };
+
     var map = L.map('map', {
       //zoomAnimation: false,
       layers: [grayscale, markers],
       worldCopyJump: true
     });
+    
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+    
     map.fitWorld().zoomIn();
 
   </script>
