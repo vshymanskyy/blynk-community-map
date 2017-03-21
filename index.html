@@ -83,8 +83,8 @@
     });
     
     var baseMaps = {
-      "Streets": streets,
       "Grayscale": grayscale,
+      "Streets": streets,
       "Satellite": satellite,
     };
 
@@ -95,7 +95,7 @@
 
     var map = L.map('map', {
       //zoomAnimation: false,
-      layers: [streets, markers],
+      layers: [grayscale, markers],
       worldCopyJump: true
     });
     
