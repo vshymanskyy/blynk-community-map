@@ -65,8 +65,10 @@
 
     for (var i = 0; i < addressPoints.length; i++) {
       var a = addressPoints[i];
-      var marker = L.marker(new L.LatLng(a[0], a[1])); // , { title: a[2] }
-      //marker.bindPopup(a[2]);
+      var marker = L.marker(new L.LatLng(a[0], a[1]));
+      if (a[2]) {
+        marker.bindPopup(a[2]);
+      }
       markers.addLayer(marker);
     }
 

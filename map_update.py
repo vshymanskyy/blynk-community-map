@@ -22,7 +22,8 @@ with gzip.open(fn, mode='rt', encoding='utf-8') as f:
         if geo_data and "location" in geo_data:
             lon = geo_data["location"]["longitude"]
             lat = geo_data["location"]["latitude"]
-            data.append([lat, lon]) #, login
+            data.append([lat, lon])
+            #data.append([lat, lon, login])
 
 print("Found {} records".format(len(data)))
 with open('map_data.js', 'w') as f:
