@@ -16,6 +16,8 @@ with gzip.open(fn, mode='rt', encoding='utf-8') as f:
     for row in table:
         login = row[2]
         ip_address = row[17]
+        if not ip_address:
+            continue;
         geo = geolite2.reader()
         geo_data = geo.get(ip_address)
         geolite2.close()
